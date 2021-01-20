@@ -1,0 +1,27 @@
+# Example input file for atomtype.py
+#
+#Short description of input file options and syntax:
+#The INPUT keyword is followed by the path to the file cotaining particle coordinates specified with quotation signs.
+
+INPUT '/path/to/coordinates.xyz'
+
+#Keyword PERIODIC is specified followed by three numbers in the same line, being the x-, y- and z-dimnesions of the orthorhombic simulation box, the #code computes distances between atoms using periodic boundary conditions. Periodic boundary conditions are only implemented for orthorhombic cells.
+
+PERIODIC 24.5 24.5 24.5
+
+#The ATOMTYPE keyword starts a 'definition line', i.e. a line defining an atom type. In each definition line the ATOMTYPE keyword is followed by an #element symbol (for example O, H or Ti) that defines the element of atom type. The element symbol is followed by the name of the atom type (max 3 #characters for example TiA). These three items (ATOMTYPE-keyword, element symbol and atom type name) completes a definition line.
+#The definition line is followed by an arbitrary number of 'condition lines'. Each condition lines specifices a distance condition that must be #satistfied by an atom belonging to this atom type. The syntax to specify distance conditions is the following: first and integer number specifying #a number of 'neighbour atoms', then the element of these neighbour atoms and finally the distance (in angstrom) within which the neighbours should #be found.
+
+ATOMTYPE Ti TiA #Defines a titanium atom type TiA
+4 O 2.0 #Distance gondition I: 4 oxygen atoms within 2.0 angstrom
+8 Ti 4.0 #Distance condition II: 8 oxygen atoms within 2.0 angstrom
+
+
+#If keyword ITP and TRUE are found in the same line in the input file this signals that the code should generate a gromacs .itp file. This requires #the user to define maximum bond lengths (distance within which atom A of type X and atom B of type Y are considered to be bonded). Such definitions #are made using the BOND keyword followed by the names of the atom types and the maximum bond distance. 
+
+ITP TRUE
+
+BOND TiA OA 3.0 #atom of type TiA is bonded to atom of type OA if the distance between them is less than 3.0 angstrom
+
+#If keyword PDB and TRUE are found in the same line the code writes atom types and particle coordinates to a .pdb file.
+PDB TRUE
