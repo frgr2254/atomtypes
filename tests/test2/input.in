@@ -1,0 +1,20 @@
+COORDINATES /home/fredrik/Documents/phd_article2/atomtypes/tests/test2/test2.xyz
+
+PERIODIC 24.5 24.5 24.5
+
+ATOMTYPE Ti TiA 
+CONDITION TiA 1 O 3.0 
+
+ATOMTYPE Ti TiB 
+CONDITION TiB 2 O 3.0 
+
+ATOMTYPE O OA
+CONDITION OA 1 Ti 3.0
+
+ATOMTYPE O OB
+CONDITION OB 2 Ti 3.0
+
+
+
+
+
