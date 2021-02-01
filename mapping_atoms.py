@@ -1,4 +1,5 @@
 #This Python module maps atoms into atom types based on geometric conditions
+import sys
 
 def check_atom_type(atomtype,element_of_type,atom_index,element_of_atom,conditions,distance,elements,violated_conditions):
     """This function returns True if a specified atom (atom with index 'atom_index') belongs to atom type
@@ -26,7 +27,7 @@ def check_atom_type(atomtype,element_of_type,atom_index,element_of_atom,conditio
         result = False #if some conditions where violated the atom is not of this type, return False
     else: 
         result = True #if all conditions where satisfied the atom is of this type, return True
-        print(element_of_atom+' with index {} was assigned to type {}'.format(atom_index,atomtype))
+        #print(element_of_atom+' with index {} was assigned to type {}'.format(atom_index,atomtype))
         #print('Atom with index {} satisfies conditions for type {} and {} = {}'.format(str(atom_index),str(atomtype),elements[atom_index],type_elements[n] ))
 
     return result
@@ -38,7 +39,7 @@ def assign_types(conditions,distance,elements,all_types,type_elements):
 
     atom_types = [] #list with assigned atom types
 
-    for atom_index in range(len(distance[0])): #loop over all atoms in the system
+    for atom_index in range(len(elements)): #loop over all atoms in the system
         number_of_assigned_types = 0 #counts the number of types assigned to one atom, should equal 1 when things work correctly
         element_of_atom = elements[atom_index] #atom is of this element
         for atomtype_index in range(len(all_types)): #loop over all atom types defined by user
@@ -49,9 +50,11 @@ def assign_types(conditions,distance,elements,all_types,type_elements):
                 atom_types.append(atomtype)
                 number_of_assigned_types += 1 #a type was assigned to the atom, add 1 to number_of_assigned_types
         if number_of_assigned_types > 1:
-            atom_types.append('X') 
-            print('Warning - More than one type was assigned to {} atom with index {} consider redefinition of atom types in input file'.format(element_of_atom,str(atom_index)))
+            #atom_types.append('X') 
+            #print('Warning - More than one type was assigned to {} atom with index {} consider redefinition of atom types in input file'.format(element_of_atom,str(atom_index)))
+            sys.exit("Job terminated with error - More than one type was assigned to {} atom with index {} consider redefinition of atom types in input file".format(element_of_atom,str(atom_index)))
         if number_of_assigned_types == 0:
             atom_types.append('X')
             print('Warning - Unable to assign atom type to {} atom with index {}'.format(element_of_atom,str(atom_index)))
+    #print('Number of assigned atom types are {}'.format(str(len(atom_types))))
     return atom_types

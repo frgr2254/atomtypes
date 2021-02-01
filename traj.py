@@ -19,7 +19,7 @@ def compute_distance(r):
         for j in range(i+1,len(r)):
             distance[i][j] = np.linalg.norm(r[i]-r[j])
             distance[j][i] = distance[i][j]
-            print('Distance between atom {} and {} is {} Angstrom\n'.format(str(i),str(j),str(distance[i][j])))
+            #print('Distance between atom {} and {} is {} Angstrom\n'.format(str(i),str(j),str(distance[i][j])))
     return distance
 
 #This function calculates distances between pairs of particles with pbc

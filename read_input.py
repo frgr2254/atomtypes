@@ -1,4 +1,4 @@
-#This Python module reads the input file
+#This Python module contains founctions for reading input files
 
 def read_inputfile():
     """This functions reads an input file"""
@@ -22,6 +22,9 @@ def read_inputfile():
     boxz = 0.0
     itp = False #do not generate itp file by default
     pdb = False #do not generate pdb file by default
+    chargemol = False #do not generate net atom charge and LJ-parameters from chargemol data by default
+    polar = False #do not generate polarizable force field from chargemol data by default
+    molname = ''
 
 
     for line in inputfile:
@@ -41,8 +44,9 @@ def read_inputfile():
                 temp.append(float(line.split(' ')[4])) #maximum distance to neigbours
                 conditions.append(temp)
                 temp = []
-            if 'ITP' in line and 'TRUE' in line:
+            if 'ITP' in line:
                 itp = True
+                molname = line.strip('\n').split(' ')[1] 
             if 'PDB' in line and 'TRUE' in line:
                 pdb = True
             if 'BOND' in line:
@@ -53,12 +57,21 @@ def read_inputfile():
                 temp = []
             if 'COORDINATES' in line:
                 path_to_traj = line.strip('\n').split(' ')[1]
+            #if 'FORCEFIELD' in line and 'TRUE' in line: #replace by CHARGEMOL statement
+             #   forcefield = True
+            if 'POLARIZABILITY' in line and 'TRUE' in line:
+                polar = True
+            if 'CHARGEMOL' in line:
+                path_to_chargemol = line.strip('\n').split(' ')[1]
+                chargemol = True
+            if 'FREE_ATOM_DATA' in line:
+                path_to_freeatom = line.strip('\n').split(' ')[1]
             
 
 
 
 
-    return boxx,boxy,boxz,pbc,all_types,type_elements,conditions,itp,pdb,all_bonds,path_to_traj
+    return [boxx,boxy,boxz,pbc,all_types,type_elements,conditions,itp,pdb,all_bonds,path_to_traj,polar,path_to_chargemol,path_to_freeatom,chargemol,molname]
 
 
 def print_input(pbc,boxx,boxy,boxz,all_types,type_elements,conditions,path_to_traj,pdb,itp):
@@ -82,6 +95,61 @@ def print_input(pbc,boxx,boxy,boxz,all_types,type_elements,conditions,path_to_tr
         print('\nParticle coordinates and the assigned atom types will be written to a PDB file\n')
     if itp:
         print('A Gromacs .itp file will be generated\n')
-    print('\n########## End of input information ###########\n')
+    print('\n########## End of input information ###########\n\n')
+    print('Assigning atom types ...')
+
 
     return
+
+
+def read_chargemol(path_to_chargemol):
+    """This function reads charges and atom volumes from chargemol output"""
+
+    #Read atomic volumes from chargemol output
+
+    volume_file = open(path_to_chargemol+'/DDEC_atomic_Rcubed_moments.xyz','r') 
+        
+
+    atom_volumes = []
+
+    file_content = volume_file.readlines() #read all lines in chargemol file with atom volumes
+
+    volume_file.close()
+
+    number_of_atoms = int(file_content[0])
+
+    lines = file_content[2:2+number_of_atoms] #lines with coordinates and volumes
+    
+
+    for line in lines:
+        atom_volumes.append(float(line.strip('\n').split()[-1])) #append atomic volume to list
+
+        
+
+
+        
+    #Read atomic charges from chargemol file
+
+    charge_file = open(path_to_chargemol+'/DDEC6_even_tempered_net_atomic_charges.xyz','r')
+
+    charges = []
+
+    file_content = charge_file.readlines() #read all lines in chargemol file with atom charges
+
+    charge_file.close()
+
+    number_of_atoms = int(file_content[0])
+
+    lines = file_content[2:2+number_of_atoms] #lines with coordinates and charges
+
+    for line in lines:
+        charges.append(float(line.strip('\n').split()[-1])) #append atomic charges to list
+
+        
+    return charges,atom_volumes
+
+
+
+    
+
+
