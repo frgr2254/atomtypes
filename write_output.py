@@ -45,6 +45,24 @@ def write_itp(atom_types,distances,all_bonds,all_types,molname,charges,elements)
             itp_lines.append(space1+str(cnt)+space2+atom_types[i]+space3+'1'+space4+molname+space5+atom_name+space6+str(cnt)+space7+format(charges[i],'.5f')+'  '+mass+'\n')
             cnt += 1
 
+    #create bond section in itp file
+    bonded_pairs = []
+
+    for bond in all_bonds:
+        for i in range(len(distances[0])):
+            for j in range(i+1,len(distances[0])):
+                if bond[0] == atom_types[i] and bond[1] == atom_types[j] and distances[i][j] <= float(bond[2]):
+                    space1 = (3-len(str(i+1)))*' '
+                    space2 = (10-len(str(j+1)))*' '
+                    space3 = 6*' '
+                    bonded_pairs.append(space1+str(i+1)+space2+str(j+1)+space3+'1\n')
+                elif bond[0] == atom_types[j] and bond[1] == atom_types[i] and distances[i][j] <= float(bond[2]):
+                    space1 = (3-len(str(i+1)))*' '
+                    space2 = (10-len(str(j+1)))*' '
+                    space3 = 6*' '
+                    bonded_pairs.append(space1+str(i+1)+space2+str(j+1)+space3+'1\n')
+
+
 
     itp_file = open('{}.itp'.format(molname),'w') #open itp file to write
 
@@ -57,6 +75,11 @@ def write_itp(atom_types,distances,all_bonds,all_types,molname,charges,elements)
 
     for x in itp_lines:
         itp_file.write(x)
+    
+    itp_file.write('\n[ bonds ]\n')
+    itp_file.write(';  i        j        func    desc\n')
+    for y in bonded_pairs:
+        itp_file.write(y)
 
 
     itp_file.close()

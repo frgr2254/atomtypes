@@ -63,9 +63,17 @@ ITP TiO2
 #Keyword BOND followed by names of two atom types (A and B) and a max bond length (d) specifies that atoms belonging to types A and B
 #should be considered as bonded if they ar within distance d Angstrom.
 
-#BOND TiA OA 3.0 #atom of type TiA is bonded to atom of type OA if the distance between them is less than 3.0 angstrom
+BOND TiA OA 3.0 #atom of type TiA is bonded to atom of type OA if the distance between them is less than 3.0 angstrom
 
-#BOND TiA OB 3.0
+BOND TiA OB 3.0
+
+BOND TiB OA 3.0
+
+BOND TiB OB 3.0
+
+BOND TiC OA 3.0
+
+BOND TiC OB 3.0
 
 
 
