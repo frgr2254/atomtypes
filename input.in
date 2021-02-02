@@ -24,8 +24,7 @@ CONDITION TiA 6 O 3.0 #Distance condition I: TiA type has 6 oxygen atoms within 
 
 
 ATOMTYPE Ti TiB 
-CONDITION TiB 5 O 3.0 
- 
+CONDITION TiB 5 O 3.0
 
 ATOMTYPE Ti TiC 
 CONDITION TiC 4 O 3.0 
