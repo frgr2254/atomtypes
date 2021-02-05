@@ -53,4 +53,5 @@ if chargemol:
 #print('The number of types is {}'.format(str(len(atom_types))))
 write_output(atom_types,elements,charges,atom_volumes)
 write_itp(atom_types,distance,all_bonds,all_types,molname,charges,elements)
+write_pdb(atom_types,elements,r,boxx,boxy,boxz)
 
