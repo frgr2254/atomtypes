@@ -1,4 +1,5 @@
 #This Python module contains founctions for reading input files
+import os
 
 def read_inputfile():
     """This functions reads an input file"""
@@ -56,7 +57,12 @@ def read_inputfile():
                 all_bonds.append(temp)
                 temp = []
             if 'COORDINATES' in line:
+                pwd = os.getcwd()
                 path_to_traj = line.strip('\n').split(' ')[1]
+                path_elements = path_to_traj.split('/')
+                if path_elements[0] == '.':
+                    path_to_traj = pwd+'/'+path_elements[-1]
+
             #if 'FORCEFIELD' in line and 'TRUE' in line: #replace by CHARGEMOL statement
              #   forcefield = True
             if 'POLARIZABILITY' in line and 'TRUE' in line:
@@ -64,6 +70,9 @@ def read_inputfile():
             if 'CHARGEMOL' in line:
                 path_to_chargemol = line.strip('\n').split(' ')[1]
                 chargemol = True
+                #path_elements = path_to_chargemol.split('/')
+                if path_to_chargemol == '.':
+                    path_to_chargemol = pwd
             if 'FREE_ATOM_DATA' in line:
                 path_to_freeatom = line.strip('\n').split(' ')[1]
             
