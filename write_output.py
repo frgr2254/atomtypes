@@ -102,10 +102,10 @@ def write_pdb(atom_types,elements,r,boxx,boxy,boxz):
     pdb_file.write('MODEL        1\n')
 
     cnt = 0
+    mol_num = 1
     for i in range(len(r)):
         space1 = (7-len(str(cnt)))*' '
         space2 = (4-len(atom_types[i]))*' '
-        space3 = 5*' '
         x_3dec = format(r[i][0],'.3f')
         space4 = (12-len(x_3dec))*' '
         y_3dec = format(r[i][1],'.3f')
@@ -113,10 +113,14 @@ def write_pdb(atom_types,elements,r,boxx,boxy,boxz):
         z_3dec = format(r[i][2],'.3f')
         space6 = (8-len(z_3dec))*' '
         space7 = (12-len(str(elements[i])))*' '
-        if (atom_types[i] == 'Hw') or (atom_types[i] == 'Ow'):
+        if atom_types[i] == 'Hw':
             residue = 'SOL'
+        elif atom_types[i] == 'Ow':
+            residue = 'SOL'
+            mol_num += 1
         else: residue = 'LIG'
-        line = 'ATOM'+space1+str(cnt)+'  '+atom_types[i]+space2+residue+space3+'1'+space4+x_3dec+space5+y_3dec+space6+z_3dec+'  1.00  0.00'+space7+elements[i]+'\n'
+        space3 = (6-len(str(mol_num)))*' '
+        line = 'ATOM'+space1+str(cnt)+'  '+atom_types[i]+space2+residue+space3+str(mol_num)+space4+x_3dec+space5+y_3dec+space6+z_3dec+'  1.00  0.00'+space7+elements[i]+'\n'
         pdb_file.write(line)
         cnt += 1
 
