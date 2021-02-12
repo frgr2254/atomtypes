@@ -1,0 +1,26 @@
+[ moleculetype ]
+; molname            nrexcl
+ethanol            1
+
+[ atoms ]
+;  nr      atype     resnr   resname  atname    cgnr     NAC      mass    desc
+   1       CA      1     ethanol       C1       1     -0.38526  12.00100
+   2       CB      1     ethanol       C2       2      0.16654  12.00100
+   3       HA      1     ethanol       H3       3      0.10475  1.00800
+   4       HA      1     ethanol       H4       4      0.09903  1.00800
+   5       HA      1     ethanol       H5       5      0.11414  1.00800
+   6       HA      1     ethanol       H6       6      0.01878  1.00800
+   7       HA      1     ethanol       H7       7      0.05069  1.00800
+   8       OA      1     ethanol       O8       8     -0.49498  15.99900
+   9       HB      1     ethanol       H9       9      0.32632  1.00800
+
+[ bonds ]
+;  i        j        func    desc
+  2         8      1
+  1         2      1
+  1         3      1
+  1         4      1
+  1         5      1
+  2         6      1
+  2         7      1
+  8         9      1

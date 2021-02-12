@@ -4,13 +4,10 @@
 
 #Keyword COORDINATES specifies the path to the trajectory file containing particle coordinate
 
-#COORDINATES /home/fredrik/Documents/phd_article2/systems/atio2_cutradius8_5A_boxlen25A/snapshots/25525/snapshot9.xyz
-#COORDINATES /home/fredrik/Documents/phd_article2/systems/atio2_cutradius8_5A_boxlen25A/first_5aimd_steps/system_50ns.xyz
-COORDINATES /home/fredrik/Documents/phd_article2/atomtypes/wrapped.xyz
+COORDINATES ./ethanol.xyz
 
 #Keyword CHARGEMOL is followed by a path that points to the directory where chargemol outputfiles are located
 
-#CHARGEMOL /home/fredrik/Documents/phd_article2/systems/atio2_cutradius8_5A_boxlen25A/snapshots/23525
 CHARGEMOL .
 
 FREE_ATOM_DATA /home/fredrik/Documents/phd_article2/systems/atio2_cutradius8_5A_boxlen25A/snapshots/23525
@@ -22,64 +19,41 @@ PERIODIC 24.5 24.5 24.5
 #The ATOMTYPE keyword starts a 'definition line', i.e. a line defining an atom type. In each definition line the ATOMTYPE keyword is followed by #an element symbol (for example O, H or Ti) that defines the element of atom type. The element symbol is followed by the name of the atom type #(e.g. TiA). These three items (ATOMTYPE-keyword, element symbol, atom type name) completes a definition line.
 #The definition line is followed by an arbitrary number of 'condition lines'. Each condition lines specifices a distance condition that must be #satistfied by an atom belonging to this atom type. The syntax to specify distance conditions is the following: first the name of the atom type #to which the condition apllies. Second an integer specifying the number of neighbours. Third is the element symbol telling what is the element #of the neighbours. Last is decimal number specifying the maximum distance within which these neigbours should be found.
 
-ATOMTYPE Ti TiA #Defines a titanium atom type TiA defined by two conditions
-CONDITION TiA 6 O 3.0 #Distance condition I: TiA type has 6 oxygen atoms within 3.0 angstrom
+ATOMTYPE C CA #Defines a titanium atom type CA defined by two conditions
+CONDITION CA 0 O 1.6 #Distance condition: CA type has 0 oxygen atoms within 1.6 angstrom
 
-ATOMTYPE Ti TiB 
-CONDITION TiB 5 O 3.0
-
-ATOMTYPE Ti TiC 
-CONDITION TiC 4 O 3.0
-
-ATOMTYPE Ti TiD 
-CONDITION TiD 3 O 3.0
+ATOMTYPE C CB 
+CONDITION CB 1 O 1.6
 
 ATOMTYPE O OA 
-CONDITION OA 3 Ti 3.0
-CONDITION OA 0 H 1.3
+CONDITION OA 1 C 1.6
 
-ATOMTYPE O OB 
-CONDITION OB 2 Ti 3.0
-CONDITION OB 0 H 1.3
+ATOMTYPE H HA 
+CONDITION HA 0 O 1.1
 
-ATOMTYPE O OH 
-CONDITION OH 1 Ti 3.0
-CONDITION OH 2 H 1.3
-
-ATOMTYPE O OF 
-CONDITION OF 1 Ti 3.0
-CONDITION OF 1 H 1.3
-
-ATOMTYPE O OG 
-CONDITION OG 2 Ti 3.0
-CONDITION OG 1 H 1.3
-
-ATOMTYPE O OC 
-CONDITION OC 2 H 1.3
-CONDITION OC 0 Ti 3.0
-
-ATOMTYPE H HA
-CONDITION HA 1 O 1.3
-
+ATOMTYPE H HB 
+CONDITION HB 1 O 1.1
 
 #If keyword ITP is found in the same line in the input file this signals that the code should generate a gromacs .itp file. ITP keyword is #followed by the name of the molecule written in the itp file. This requires the user to define maximum bond lengths (distance within which atom #A of type X and atom B of type Y are considered to be bonded). Such definitions are made using the BOND keyword followed by the names of the #atom types and the maximum bond distance. 
 
-ITP TiO2
+ITP ethanol
 
 #Keyword BOND followed by names of two atom types (A and B) and a max bond length (d) specifies that atoms belonging to types A and B
 #should be considered as bonded if they ar within distance d Angstrom.
 
-BOND TiA OA 3.0 #atom of type TiA is bonded to atom of type OA if the distance between them is less than 3.0 angstrom
+BOND CB OA 1.6 #atom of type CA is bonded to atom of type OA if the distance between them is less than 1.6 angstrom
 
-BOND TiA OB 3.0
+BOND CA CB 1.6
 
-BOND TiB OA 3.0
+BOND CA HA 1.3
 
-BOND TiB OB 3.0
+BOND CB HA 1.3
 
-BOND TiC OA 3.0
+BOND OA HB 1.3
 
-BOND TiC OB 3.0
+
+
+
 
 
 
