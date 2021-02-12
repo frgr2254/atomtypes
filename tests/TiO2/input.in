@@ -22,32 +22,44 @@ PERIODIC 24.5 24.5 24.5
 #The definition line is followed by an arbitrary number of 'condition lines'. Each condition lines specifices a distance condition that must be #satistfied by an atom belonging to this atom type. The syntax to specify distance conditions is the following: first the name of the atom type #to which the condition apllies. Second an integer specifying the number of neighbours. Third is the element symbol telling what is the element #of the neighbours. Last is decimal number specifying the maximum distance within which these neigbours should be found.
 
 ATOMTYPE Ti TiA #Defines a titanium atom type TiA defined by two conditions
-CONDITION TiA 6 O 2.3 #Distance condition I: TiA type has 6 oxygen atoms within 3.0 angstrom
+CONDITION TiA 6 O 3.0 #Distance condition I: TiA type has 6 oxygen atoms within 3.0 angstrom
 
 ATOMTYPE Ti TiB 
-CONDITION TiB 5 O 2.3
+CONDITION TiB 5 O 3.0
 
 ATOMTYPE Ti TiC 
-CONDITION TiC 4 O 2.3
+CONDITION TiC 4 O 3.0
+
+ATOMTYPE Ti TiD 
+CONDITION TiD 3 O 3.0
 
 ATOMTYPE O OA 
-CONDITION OA 3 Ti 2.3
+CONDITION OA 3 Ti 3.0
+CONDITION OA 0 H 1.3
 
 ATOMTYPE O OB 
-CONDITION OB 2 Ti 2.3
+CONDITION OB 2 Ti 3.0
+CONDITION OB 0 H 1.3
+
+ATOMTYPE O OH 
+CONDITION OH 1 Ti 3.0
+CONDITION OH 2 H 1.3
+
+ATOMTYPE O OF 
+CONDITION OF 1 Ti 3.0
+CONDITION OF 1 H 1.3
+
+ATOMTYPE O OG 
+CONDITION OG 2 Ti 3.0
+CONDITION OG 1 H 1.3
 
 ATOMTYPE O OC 
-CONDITION OC 1 Ti 2.3
+CONDITION OC 2 H 1.3
+CONDITION OC 0 Ti 3.0
 
-ATOMTYPE O Ow 
-CONDITION Ow 2 H 1.3
-CONDITION Ow 0 Ti 2.3
+ATOMTYPE H HA
+CONDITION HA 1 O 1.3
 
-ATOMTYPE H Hw
-CONDITION Hw 1 O 1.3
-
-ATOMTYPE H HB
-CONDITION HB 2 O 1.3
 
 
 
