@@ -5,9 +5,11 @@ from read_input import *
 from traj import *
 from mapping_atoms import *
 from write_output import *
+from timeit import default_timer as timer
 #from ase.io import read #import function for reading xyz from atomic simulation environment
 
 #Read input file
+start = timer()
 input_parameters = read_inputfile()
 boxx = input_parameters[0] #box x-dimension
 boxy = input_parameters[1] #box y-dimension
@@ -29,19 +31,31 @@ molname = input_parameters[15] #Name of molecule written in itp file
 
 #print input information in terminal
 print_input(pbc,boxx,boxy,boxz,all_types,type_elements,conditions,path_to_traj,pdb,itp)
+end = timer()
+t_read_input = end-start #time required to read input
 
 #Read trajectory
+start = timer()
 r,elements = read_frame(path_to_traj,0)
+end = timer()
+t_read_traj = end-start #time required to read trajectory
 
 #Calculate distances between particles
+start = timer()
 if pbc:
     distance = compute_distance_pbc(r,boxx,boxy,boxz)
 else: distance = compute_distance(r)
+end = timer()
+t_compute_distance = end-start #time required to compute distances
 
 #assign atom types by going through all conditions
+start = timer()
 atom_types = assign_types(conditions,distance,elements,all_types,type_elements)
+end = timer()
+t_map_atoms = end-start #time required to compute distances
 
 #read chargemol data
+start = timer()
 if chargemol:
     charges,atom_volumes = read_chargemol(path_to_chargemol)
     free_charges,free_volumes = read_chargemol(path_to_freeatom)
@@ -60,4 +74,11 @@ if (chargemol == False) and (itp == True):
     print('\nWARNING: To generate a Gromacs *.itp file you must provide atomic charges, you do this in the input file using CHARGEMOL keyword. No *.itp file will be generated')
 write_pdb(atom_types,elements,r,boxx,boxy,boxz)
 type_freq(atom_types,all_types)
+
+end = timer()
+t_write_output = end-start #time required to compute distances
+
+
+#print timing results
+write_timing(t_read_input,t_read_traj,t_compute_distance,t_map_atoms,t_write_output)
 

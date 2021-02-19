@@ -135,3 +135,38 @@ def type_freq(atom_types,all_types):
     for i in range(len(all_types)):
         print('{} atoms assigned to type {}'.format(str(atom_types.count(all_types[i])),all_types[i]))
     return
+
+def write_timing(t_read_input,t_read_traj,t_compute_distance,t_map_atoms,t_write_output):
+    """This function prints in the terminal how much time the code spends on different tasks"""
+    ttot = t_read_input+t_read_traj+t_compute_distance+t_map_atoms+t_write_output
+    frac_read_input = format(100*t_read_input/ttot,'.2f')
+    t_read_input = format(t_read_input,'.2f')
+    frac_read_traj = format(100*t_read_traj/ttot,'.2f')
+    t_read_traj = format(t_read_traj,'.2f')
+    frac_compute_distance = format(100*t_compute_distance/ttot,'.2f')
+    t_compute_distance = format(t_compute_distance,'.2f')
+    frac_map_atoms = format(100*t_map_atoms/ttot,'.2f')
+    t_map_atoms = format(t_map_atoms,'.2f')
+    frac_write_output = format(100*t_write_output/ttot,'.2f')
+    t_write_output = format(t_write_output,'.2f')
+
+    space2 = (25-len(frac_read_input))*' '
+
+    print('\n\n                      Timing data\n')
+    print('---------------------------------------------------------------------\n')
+    print('task                time (seconds)         fraction of total run time (%)')
+    print('---------------------------------------------------------------------\n')
+    print('Read input                {}{}{}'.format(t_read_input,space2,frac_read_input))
+    space2 = (25-len(frac_read_traj))*' '
+
+    print('Read trajectory           {}{}{}'.format(t_read_traj,space2,frac_read_traj))
+    space2 = (25-len(frac_compute_distance))*' '
+
+    print('Compute distances         {}{}{}'.format(t_compute_distance,space2,frac_compute_distance))
+    space2 = (25-len(frac_map_atoms))*' '
+
+    print('Check conditions          {}{}{}'.format(t_map_atoms,space2,frac_map_atoms))
+    space2 = (25-len(frac_write_output))*' '
+
+    print('Write output              {}{}{}'.format(t_write_output,space2,frac_write_output))
+    return
