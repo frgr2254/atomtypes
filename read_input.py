@@ -5,7 +5,7 @@ def read_inputfile():
     """This functions reads an input file"""
 
     #Ask user to provide an input file
-    print('\natomtypes is a Python code that mapp atoms into atom types representing chemically distinct environments \n \n'+
+    print('\nAtomtypes is a Python code that mapp atoms into atom types representing chemically distinct environments \n \n'+
     ' Please specify the name of your input file and press enter \n \n')
     infile_name = input()
     
@@ -26,6 +26,9 @@ def read_inputfile():
     chargemol = False #do not generate net atom charge and LJ-parameters from chargemol data by default
     polar = False #do not generate polarizable force field from chargemol data by default
     molname = ''
+    path_to_chargemol = ''
+    path_to_freeatom = ''
+
 
 
     for line in inputfile:
@@ -86,10 +89,10 @@ def read_inputfile():
 def print_input(pbc,boxx,boxy,boxz,all_types,type_elements,conditions,path_to_traj,pdb,itp):
     """This function prints input information to the user"""
 
-    print('########## Information read from input file #############\n')
+    print('\n########## Information read from input file #############\n')
 
     if pbc:
-        print('Using periodic boundary conditions with box x-, y- and z-dimensions {} {} {}\n'.format(boxx,boxy,boxz))
+        print('Using periodic boundary conditions with box x-, y- and z-dimensions {} {} {} Angstrom\n'.format(boxx,boxy,boxz))
     else: print('Periodic boundary conditions are not used\n')
 
     print('You have defined the following atom types:')

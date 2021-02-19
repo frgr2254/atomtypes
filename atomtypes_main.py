@@ -45,14 +45,19 @@ atom_types = assign_types(conditions,distance,elements,all_types,type_elements)
 if chargemol:
     charges,atom_volumes = read_chargemol(path_to_chargemol)
     free_charges,free_volumes = read_chargemol(path_to_freeatom)
+    write_output(atom_types,elements,charges,atom_volumes)
+    write_itp(atom_types,distance,all_bonds,all_types,molname,charges,elements)
 
 #write output
 #print('The number of atoms is {}'.format(str(len(elements))))
 #print('The number of charges is {}'.format(str(len(charges))))
 #print('The number of atom volumes is {}'.format(str(len(atom_volumes))))
 #print('The number of types is {}'.format(str(len(atom_types))))
-write_output(atom_types,elements,charges,atom_volumes)
-write_itp(atom_types,distance,all_bonds,all_types,molname,charges,elements)
+
+#write_output(atom_types,elements,charges,atom_volumes)
+#write_itp(atom_types,distance,all_bonds,all_types,molname,charges,elements)
+if (chargemol == False) and (itp == True):
+    print('\nWARNING: To generate a Gromacs *.itp file you must provide atomic charges, you do this in the input file using CHARGEMOL keyword. No *.itp file will be generated')
 write_pdb(atom_types,elements,r,boxx,boxy,boxz)
 type_freq(atom_types,all_types)
 

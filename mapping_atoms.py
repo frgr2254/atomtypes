@@ -52,9 +52,9 @@ def assign_types(conditions,distance,elements,all_types,type_elements):
         if number_of_assigned_types > 1:
             #atom_types.append('X') 
             #print('Warning - More than one type was assigned to {} atom with index {} consider redefinition of atom types in input file'.format(element_of_atom,str(atom_index)))
-            sys.exit("Job terminated with error - More than one type was assigned to {} atom with index {} consider redefinition of atom types in input file".format(element_of_atom,str(atom_index)))
+            sys.exit("JOB TERMINATED WITH ERROR: More than one type was assigned to {} atom with index {} consider redefinition of atom types in input file".format(element_of_atom,str(atom_index)))
         if number_of_assigned_types == 0:
             atom_types.append('X')
-            print('Warning - Unable to assign atom type to {} atom with index {}'.format(element_of_atom,str(atom_index)))
+            print('WARNING: Unable to assign atom type to {} atom with index {}'.format(element_of_atom,str(atom_index)))
     #print('Number of assigned atom types are {}'.format(str(len(atom_types))))
     return atom_types
