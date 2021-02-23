@@ -170,3 +170,29 @@ def write_timing(t_read_input,t_read_traj,t_compute_distance,t_map_atoms,t_write
 
     print('Write output              {}{}{}'.format(t_write_output,space2,frac_write_output))
     return
+
+def write_distr(all_types,atom_types,charges,atom_volumes):
+    """This functions writes charges and atomic volumes for each atom type to file"""
+    type_charges = []
+    type_volumes = []
+    temp_charges = []
+    temp_volumes = []
+    for i in range(len(all_types)):
+        temp_charges.append(all_types[i]+' ')
+        temp_volumes.append(all_types[i]+' ')
+        for j in range(len(charges)):
+            if atom_types[j] == all_types[i]:
+                temp_charges.append(str(charges[j])+' ')
+                temp_volumes.append(str(atom_volumes[j])+' ')
+        temp_charges.append('\n')
+        temp_volumes.append('\n')
+        type_charges.append(temp_charges)
+        type_volumes.append(temp_volumes)
+        temp_charges = []
+        temp_volumes = []
+    charge_file = open('charges.out','w')
+    volume_file = open('volumes.out','w')
+    for k in range(len(type_charges)):
+        charge_file.writelines(type_charges[k])
+        volume_file.writelines(type_volumes[k])
+    return

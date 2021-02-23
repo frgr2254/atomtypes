@@ -75,6 +75,8 @@ if (chargemol == False) and (itp == True):
 write_pdb(atom_types,elements,r,boxx,boxy,boxz)
 type_freq(atom_types,all_types)
 
+write_distr(all_types,atom_types,charges,atom_volumes)
+
 end = timer()
 t_write_output = end-start #time required to compute distances
 

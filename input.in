@@ -4,14 +4,14 @@
 
 #Keyword COORDINATES specifies the path to the trajectory file containing particle coordinate
 
-#COORDINATES /home/fredrik/Documents/phd_article2/systems/atio2_cutradius8_5A_boxlen25A/snapshots/25525/snapshot9.xyz
+COORDINATES /home/fredrik/Documents/phd_article2/systems/atio2_cutradius8_5A_boxlen25A/snapshots/25525/snapshot9.xyz
 #COORDINATES /home/fredrik/Documents/phd_article2/systems/atio2_cutradius8_5A_boxlen25A/first_5aimd_steps/system_50ns.xyz
-COORDINATES /home/fredrik/Documents/phd_article2/systems/atio2_cutradius8_5A_boxlen25A/snapshots/snapshot19.xyz
+#COORDINATES /home/fredrik/Documents/phd_article2/systems/atio2_cutradius8_5A_boxlen25A/snapshots/snapshot19.xyz
 #COORDINATES /home/fredrik/Documents/phd_article2/systems/atio2_cutradius8_5A_boxlen25A/nanosphere.xyz
 
 #Keyword CHARGEMOL is followed by a path that points to the directory where chargemol outputfiles are located
 
-#CHARGEMOL /home/fredrik/Documents/phd_article2/systems/atio2_cutradius8_5A_boxlen25A/snapshots/23525
+CHARGEMOL /home/fredrik/Documents/phd_article2/systems/atio2_cutradius8_5A_boxlen25A/snapshots/25525
 #CHARGEMOL .
 
 FREE_ATOM_DATA /home/fredrik/Documents/phd_article2/systems/atio2_cutradius8_5A_boxlen25A/snapshots/23525
